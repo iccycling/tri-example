@@ -609,7 +609,7 @@ nav::after {
 
 /* ── JOIN BAND ── */
 .join {
-  background: var(--accent-dark);
+  background: var(--accent);
   padding: 80px var(--gutter);
   display: flex; align-items: center; justify-content: space-between;
   gap: 40px; flex-wrap: wrap;
