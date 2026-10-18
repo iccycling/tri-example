@@ -1,0 +1,60 @@
+# ============================================================
+#  IC Tri — Hugo-Konfiguration
+#  Wichtigste Stellen zum Anpassen: baseURL, [params]
+# ============================================================
+baseURL      = "https://iccycling.github.io/tri-example/"   # URL, unter der die Seite online ist (mit / am Ende)
+locale       = "en-GB"
+title        = "Imperial College Triathlon Club"
+timeZone     = "Europe/London"                      # wichtig für Ablaufdatum der News
+enableRobotsTXT = true
+
+# --- Zeitgesteuerte Inhalte -------------------------------------------------
+buildExpired = true    # abgelaufene News werden trotzdem gebaut (→ Archiv). Ausgeblendet werden sie per Template.
+buildFuture  = false   # Beiträge mit Datum in der Zukunft erscheinen erst ab diesem Tag
+
+[pagination]
+  pagerSize = 9        # Beiträge pro Seite in der Blog-Übersicht
+
+[taxonomies]
+  tag = "tags"
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true      # erlaubt HTML direkt in Markdown-Dateien
+  [markup.highlight]
+    noClasses = true
+    style = "github"   # Farbschema für Code-Blöcke
+
+# Ähnliche Beiträge: über gemeinsame Tags
+[related]
+  includeNewer = true
+  threshold = 50
+  toLower = true
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+
+[outputFormats.LLMS]
+  mediaType      = "text/plain"
+  baseName       = "llms"
+  isPlainText    = true
+  notAlternative = true
+
+[outputs]
+  home    = ["HTML", "LLMS"]
+  section = ["HTML", "RSS"]
+
+[params]
+  description     = "Imperial College Triathlon Club — student-run swim, bike, and run training in London. Weekly sessions, races, and socials for all levels, backed by Imperial College Union."
+  noindex         = true                      # true = Suchmaschinen aussperren (Prototyp). Zum Launch auf false setzen!
+  email           = "triathlon@imperial.ac.uk"
+  instagram       = "https://www.instagram.com/imperialtriathlon"
+  instagramHandle = "@imperialtriathlon"
+  strava          = "#"                       # Strava-Club-URL eintragen
+  union           = "https://www.imperialcollegeunion.org/"
+  logo            = "images/ictri-archivo.svg"   # Logo für Suchmaschinen (strukturierte Daten)
+  csp             = true                         # Content-Security-Policy-Schutz (empfohlen)
+  # Webseiten, von denen Einbettungen (iframes) geladen werden dürfen. Weitere Seiten hier ergänzen,
+  # z. B. "https://www.google.com" für Google-Maps-Karten.
+  embedHosts      = ["https://www.youtube-nocookie.com", "https://www.instagram.com"]
+  blockAiTraining = false                        # true = KI-Trainings-Crawler per robots.txt bitten, die Seite nicht zu nutzen
