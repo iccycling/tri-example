@@ -1,0 +1,7 @@
+# Hält die beim Veröffentlichen verwendeten GitHub-Actions aktuell (Sicherheit).
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
