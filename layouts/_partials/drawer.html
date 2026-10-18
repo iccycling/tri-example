@@ -1,0 +1,20 @@
+{{- $p := . -}}
+{{- $nav := $p.Params.nav -}}
+{{- if not $nav }}{{ $nav = index (dict "committee" "about" "blog" "news" "news" "news" "authors" "news" "tags" "news") $p.Section | default "" }}{{ end -}}
+{{- $item := $p.Params.navitem | default "" -}}
+<div class="nav-drawer">
+  <ul>
+    <li><a href="{{ "about/" | relURL }}"{{ if eq $nav "about" }} class="active"{{ end }}>About</a></li>
+    <li class="drawer-group">
+      <span class="drawer-group-label">Training</span>
+      <ul class="drawer-sub">
+        {{- range (slice (dict "s" "swim" "l" "Swim") (dict "s" "bike" "l" "Bike") (dict "s" "run" "l" "Run") (dict "s" "beyond" "l" "Beyond")) }}
+        <li><a href="{{ printf "%s/" .s | relURL }}"{{ if eq $item .s }} class="active"{{ end }}>{{ .l }}</a></li>
+        {{- end }}
+      </ul>
+    </li>
+    <li><a href="{{ "racing/" | relURL }}"{{ if eq $nav "racing" }} class="active"{{ end }}>Racing</a></li>
+    <li><a href="{{ site.Home.RelPermalink }}#news"{{ if eq $nav "news" }} class="active"{{ end }}>News &amp; Blog</a></li>
+  </ul>
+  <a href="{{ "about/#join" | relURL }}" class="drawer-cta">Join the Club</a>
+</div>

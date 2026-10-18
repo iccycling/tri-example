@@ -1,0 +1,2 @@
+{{- /* {{< button href="https://…" >}}Beschriftung{{< /button >}} */ -}}
+<p><a class="btn-accent" href="{{ .Get "href" }}"{{ if hasPrefix (.Get "href") "http" }} target="_blank" rel="noopener"{{ end }}>{{ .Inner | markdownify | plainify }}</a></p>

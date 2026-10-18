@@ -1,0 +1,4 @@
+{{- /* Links: /seite/ (beginnt mit /) wird automatisch zur richtigen Adresse der Seite; externe Links öffnen in neuem Tab */ -}}
+{{- $d := .Destination -}}
+{{- if and (strings.HasPrefix $d "/") (not (strings.HasPrefix $d "//")) }}{{ $d = strings.TrimPrefix "/" $d | relURL }}{{ end -}}
+<a href="{{ $d | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }} target="_blank" rel="noopener"{{ end }}>{{ .Text }}</a>

@@ -1,0 +1,10 @@
+User-agent: *
+{{ if site.Params.noindex }}Disallow: /
+{{ else }}Allow: /
+{{ if site.Params.blockAiTraining }}
+# KI-Trainings-Crawler bitten, die Inhalte nicht zu nutzen (hugo.toml → params.blockAiTraining)
+{{ range slice "GPTBot" "CCBot" "Google-Extended" "anthropic-ai" "ClaudeBot" "PerplexityBot" "Bytespider" "Applebot-Extended" }}User-agent: {{ . }}
+Disallow: /
+
+{{ end }}{{ end }}Sitemap: {{ "sitemap.xml" | absURL }}
+{{ end }}

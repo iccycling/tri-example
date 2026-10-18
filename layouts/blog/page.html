@@ -1,0 +1,36 @@
+{{ define "main" }}
+<article>
+  <header class="post-head">
+    <div class="tag-row">{{ range .GetTerms "tags" }}<a class="tag-pill" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}</div>
+    <h1>{{ .Title }}</h1>
+    <div class="post-meta">
+      {{ partial "authors-line.html" . }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+      <span>{{ .ReadingTime }} min read</span>
+    </div>
+    <span class="post-rule" aria-hidden="true"></span>
+  </header>
+
+
+  <div class="prose">{{ .Content }}</div>
+
+  <div class="post-foot">
+    {{ with .GetTerms "tags" }}<div class="tag-row">{{ range . }}<a class="tag-pill" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}</div>{{ end }}
+    {{ partial "share.html" . }}
+    {{ partial "author-boxes.html" . }}
+  </div>
+</article>
+
+{{- /* ähnliche Beiträge: gleiche Tags, sonst die neuesten */ -}}
+{{- $related := first 3 (where (site.RegularPages.Related .) "Section" "blog") }}
+{{- if lt (len $related) 3 }}
+  {{- $latest := where (where site.RegularPages "Section" "blog") "RelPermalink" "ne" .RelPermalink }}
+  {{- $related = first 3 (union $related $latest.ByDate.Reverse) }}
+{{- end }}
+{{- if $related }}
+<section class="related">
+  <h2>More from the blog</h2>
+  <div class="bgrid bgrid--flush">{{ range $related }}{{ partial "blog-card.html" . }}{{ end }}</div>
+</section>
+{{- end }}
+{{ end }}

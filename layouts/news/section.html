@@ -1,0 +1,19 @@
+{{ define "main" }}
+<header class="page-head">
+  <span class="label">News</span>
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="page-head-text">{{ . }}</div>{{ end }}
+</header>
+{{- $active := slice }}{{ $archived := slice }}
+{{- range .Pages.ByDate.Reverse }}{{ if partial "news-expired.html" . }}{{ $archived = $archived | append . }}{{ else }}{{ $active = $active | append . }}{{ end }}{{ end }}
+<section class="news-list">
+  {{- if $active }}
+  <ul class="nb-news">{{ range $active }}<li>{{ partial "news-row.html" . }}</li>{{ end }}</ul>
+  {{- else }}<p class="nb-empty">No current news. Check the archive below.</p>{{ end }}
+
+  {{- if $archived }}
+  <h2 class="news-archive-title">Archive</h2>
+  <ul class="nb-news nb-news--archive">{{ range $archived }}<li>{{ partial "news-row.html" . }}</li>{{ end }}</ul>
+  {{- end }}
+</section>
+{{ end }}

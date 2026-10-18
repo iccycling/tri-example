@@ -1,0 +1,14 @@
+{{- /* FAQ-Abschnitt aus data/faq/<key>.yaml. Parameter: key, title, bg (z. B. " bg-off") */ -}}
+{{- $items := index hugo.Data.faq .key -}}
+<section class="content-section{{ .bg }}" id="faq">
+  <span class="label">FAQ</span>
+  <h2>{{ .title }}</h2>
+  <div class="faq-list">
+    {{- range $items }}
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">{{ .q }}</button>
+      <div class="faq-answer">{{ .a | safeHTML | replaceRE `href="/` (printf "href=\"%s" site.Home.RelPermalink) | safeHTML }}</div>
+    </div>
+    {{- end }}
+  </div>
+</section>

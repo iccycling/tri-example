@@ -1,0 +1,93 @@
+{{ define "main" }}
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <img class="page-hero-bg" src="{{ "images/swimming-hero.jpg" | relURL }}" alt="" style="object-position: 60% 62%;">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Training</div>
+    <h1 class="page-hero-title">Swim</h1>
+    <p class="page-hero-sub">Structured pool sets for every level — and open-water swims when the weather turns.</p>
+  </div>
+</section>
+
+<!-- TODO: Texte, Zeiten, Orte und Regeln sind Platzhalter -->
+<!-- INTRO -->
+<section class="content-section" id="intro">
+  <div class="intro">
+    <div class="text-block">
+      <span class="label">Swim</span>
+      <h2>Where every triathlon starts</h2>
+      <p>Swimming is the first discipline in triathlon — and the one most people find hardest, because good technique takes time to learn.</p>
+      <p>Races usually start in open water. Waves, murky visibility and a crowd of swimmers around you are a challenge of their own. The good news: the swim is the shortest part of a triathlon.</p>
+      <p>We run coached pool sessions for everyone — whether you want to learn front crawl to get through the swim of your first triathlon, or sharpen your technique as an experienced swimmer.</p>
+    </div>
+    <div class="big-num" aria-hidden="true">01</div>
+  </div>
+</section>
+
+<!-- POOL SESSIONS -->
+<section class="content-section bg-off" id="pool">
+  <div class="split">
+    <div class="text-block">
+      <span class="label">Pool sessions</span>
+      <h2>Coached. Structured. Every level.</h2>
+      <p>Every Monday a qualified coach runs the session. Lanes are split by pace, so you always swim with people at your level.</p>
+      <p>Drills first, then a main set that builds endurance — you get feedback on your stroke, not just lengths.</p>
+      <div class="keyfacts">
+        <dl class="kf-main">
+          <div><dt>When</dt><dd><strong>Mon 19:00</strong><span>60 minutes, weekly</span></dd></div>
+          <div><dt>Where</dt><dd><strong>University pool</strong><span>Exact venue tbc</span></dd></div>
+        </dl>
+        <dl class="kf-minor">
+          <div><dt>Who</dt><dd>All levels — non-swimmers welcome</dd></div>
+          <div><dt>Bring</dt><dd>Cap &amp; goggles, swimwear, towel</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="split-media"><img src="{{ "images/swim-example.jpg" | relURL }}" alt="Swimmers training in the pool" style="object-position: center 50%;" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- OPEN WATER -->
+<section class="content-section" id="open-water">
+  <div class="split split--rev">
+    <div class="text-block">
+      <span class="label">Open water</span>
+      <h2>Open water swimming</h2>
+      <p>When the weather warms up we swim outdoors at a safe, supervised venue. Open water is a different skill — sighting, cold and choppy water — and it is the best way to get ready for a race.</p>
+      <div class="callout"><strong>Not coached.</strong> Open-water swims are peer-led: we swim together, look after each other, and share tips. Dates and venue are announced in the members' WhatsApp group.</div>
+      <ul class="bring-list">
+        <li>Wetsuit (strongly recommended) and a brightly coloured cap</li>
+        <li>Tow float — required for every swim</li>
+        <li>Comfortable swimming 400 m in the pool first</li>
+        <li>We always swim in a group, never alone</li>
+      </ul>
+    </div>
+    <div class="split-media"><img src="{{ "images/open-water-swim-example.jpg" | relURL }}" alt="Athletes at an open-water start" style="object-position: 50% 50%;" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- FAQ (Fragen und Antworten stehen in data/faq/swim.yaml) -->
+{{ partial "faq.html" (dict "key" "swim" "title" "Swimming questions" "bg" " bg-off") }}
+
+<!-- BEYOND -->
+<a href="{{ "beyond/" | relURL }}" class="disc-cross-link">
+  <div class="dcl-main">
+    <span class="dcl-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+    <div>
+      <div class="dcl-title">Want to get more out of your training?</div>
+      <div class="dcl-sub">Strength training, recovery, mobility and nutrition — everything around the sessions that makes you faster.</div>
+    </div>
+  </div>
+  <span class="arrow-link">Explore Beyond</span>
+</a>
+
+<!-- JOIN -->
+<section class="join" id="join">
+  <div class="join-main">
+    <h2>Want to swim with ICTRI?</h2>
+    <p class="wide">Get in touch or join the club. We never train all disciplines at once — you do not need to do all three to join our swim sessions.</p>
+  </div>
+  <a href="{{ "about/#join" | relURL }}" class="btn-white">Join or get in touch →</a>
+</section>
+{{ end }}

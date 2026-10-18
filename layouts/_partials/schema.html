@@ -1,0 +1,50 @@
+{{- /* Strukturierte Daten (schema.org, JSON-LD) für Suchmaschinen und KI-Suche */ -}}
+{{- $home := site.Home.Permalink -}}
+{{- $orgId := printf "%s#organization" $home -}}
+{{- $webId := printf "%s#website" $home -}}
+{{- $fmt := "2006-01-02T15:04:05Z07:00" -}}
+{{- $same := slice site.Params.instagram -}}
+{{- if and site.Params.strava (ne site.Params.strava "#") }}{{ $same = $same | append site.Params.strava }}{{ end -}}
+{{- $org := dict "@type" "SportsOrganization" "@id" $orgId "name" site.Title "alternateName" "ICTRI" "url" $home "sport" "Triathlon" "description" site.Params.description "logo" (site.Params.logo | absURL) "sameAs" $same "memberOf" (dict "@type" "CollegeOrUniversity" "name" "Imperial College London" "url" "https://www.imperial.ac.uk/") "parentOrganization" (dict "@type" "Organization" "name" "Imperial College Union" "url" site.Params.union) "address" (dict "@type" "PostalAddress" "addressLocality" "London" "addressCountry" "GB") "contactPoint" (dict "@type" "ContactPoint" "contactType" "membership enquiries" "url" ("about/#contact" | absURL)) -}}
+{{- $web := dict "@type" "WebSite" "@id" $webId "name" site.Title "url" $home "inLanguage" "en-GB" "publisher" (dict "@id" $orgId) -}}
+{{- $graph := slice $org $web -}}
+
+{{- /* Brotkrumen */ -}}
+{{- if not .IsHome }}
+  {{- $crumbs := slice (dict "@type" "ListItem" "position" 1 "name" "Home" "item" $home) -}}
+  {{- $pos := 2 -}}
+  {{- if and .IsPage (in (slice "blog" "news" "committee" "authors") .Section) }}
+    {{- with site.GetPage (printf "/%s" .Section) }}{{ $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $pos "name" .Title "item" .Permalink) }}{{ $pos = add $pos 1 }}{{ end -}}
+  {{- end }}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $pos "name" .Title "item" .Permalink) -}}
+  {{- $graph = $graph | append (dict "@type" "BreadcrumbList" "itemListElement" $crumbs) -}}
+{{- end }}
+
+{{- /* Seitenspezifisch */ -}}
+{{- $desc := .Description | default (.Summary | plainify | truncate 160) | default site.Params.description -}}
+{{- if and .IsPage (eq .Section "blog") }}
+  {{- $authors := slice -}}
+  {{- range .Params.authors }}{{ with site.GetPage (printf "/authors/%s" (. | urlize)) }}{{ $authors = $authors | append (dict "@type" "Person" "name" .Title "url" .Permalink) }}{{ else }}{{ $authors = $authors | append (dict "@type" "Person" "name" .) }}{{ end }}{{ end -}}
+  {{- $post := dict "@type" "BlogPosting" "headline" .Title "description" (.Params.summary | default $desc) "datePublished" (.Date.Format $fmt) "dateModified" (.Lastmod.Format $fmt) "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink) "url" .Permalink "inLanguage" "en-GB" "publisher" (dict "@id" $orgId) "isPartOf" (dict "@id" $webId) -}}
+  {{- if $authors }}{{ $post = merge $post (dict "author" $authors) }}{{ else }}{{ $post = merge $post (dict "author" (dict "@id" $orgId)) }}{{ end -}}
+  {{- with partial "share-image.html" . }}{{ $post = merge $post (dict "image" (partial "fill.html" (dict "res" . "size" "1200x630")).Permalink) }}{{ end -}}
+  {{- with .GetTerms "tags" }}{{ $kw := slice }}{{ range . }}{{ $kw = $kw | append .LinkTitle }}{{ end }}{{ $post = merge $post (dict "keywords" (delimit $kw ", ")) }}{{ end -}}
+  {{- $graph = $graph | append $post -}}
+{{- else if and .IsPage (eq .Section "news") }}
+  {{- $graph = $graph | append (dict "@type" "NewsArticle" "headline" .Title "description" (.Params.summary | default $desc) "datePublished" (.Date.Format $fmt) "dateModified" (.Lastmod.Format $fmt) "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink) "url" .Permalink "inLanguage" "en-GB" "author" (dict "@id" $orgId) "publisher" (dict "@id" $orgId)) -}}
+{{- else if and .IsPage (in (slice "committee" "authors") .Section) }}
+  {{- $person := dict "@type" "Person" "name" .Title "url" .Permalink "worksFor" (dict "@id" $orgId) -}}
+  {{- with .Params.role }}{{ $person = merge $person (dict "jobTitle" .) }}{{ end -}}
+  {{- with partial "photo.html" . }}{{ $person = merge $person (dict "image" (.Fill "400x400 Smart q80").Permalink) }}{{ end -}}
+  {{- $graph = $graph | append $person -}}
+{{- else if not .IsHome }}
+  {{- $graph = $graph | append (dict "@type" "WebPage" "name" .Title "description" $desc "url" .Permalink "inLanguage" "en-GB" "isPartOf" (dict "@id" $webId) "about" (dict "@id" $orgId)) -}}
+{{- end }}
+
+{{- /* FAQ (aus data/faq/…) */ -}}
+{{- with .Params.faq }}
+  {{- $qs := slice -}}
+  {{- range index hugo.Data.faq . }}{{ $qs = $qs | append (dict "@type" "Question" "name" .q "acceptedAnswer" (dict "@type" "Answer" "text" (.a | plainify))) }}{{ end -}}
+  {{- $graph = $graph | append (dict "@type" "FAQPage" "mainEntity" $qs) -}}
+{{- end }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>

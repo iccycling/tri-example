@@ -1,0 +1,8 @@
+{{- /* param: Seite (Komitee-Mitglied oder Autor), optional dict "page" "size" */ -}}
+{{- $p := . }}{{ $size := 240 }}
+{{- if reflect.IsMap . }}{{ $p = .page }}{{ with .size }}{{ $size = . }}{{ end }}{{ end }}
+{{- $initials := slice }}{{ range split $p.Title " " }}{{ $initials = $initials | append (upper (substr . 0 1)) }}{{ end }}
+{{- if gt (len $initials) 2 }}{{ $initials = slice (index $initials 0) (index $initials (sub (len $initials) 1)) }}{{ end }}
+<div class="avatar">
+  {{- with partial "photo.html" $p }}{{ $im := .Fill (printf "%dx%d Smart q82" $size $size) }}<img src="{{ $im.RelPermalink }}" width="{{ $im.Width }}" height="{{ $im.Height }}" alt="" loading="lazy">{{ else }}{{ delimit $initials "" }}{{ end -}}
+</div>

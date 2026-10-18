@@ -1,0 +1,6 @@
+{{- /* Bild für Link-Vorschauen (WhatsApp, soziale Netze, Suchmaschinen):
+       1. front matter  preview: "datei.jpg"   2. sonst die rote Karte assets/images/social-card.jpg */ -}}
+{{- $r := "" -}}
+{{- if .IsPage }}{{ with .Params.preview }}{{ $r = $.Resources.GetMatch . }}{{ end }}{{ end -}}
+{{- if not $r }}{{ $r = resources.Get "images/social-card.jpg" }}{{ end -}}
+{{- return $r -}}

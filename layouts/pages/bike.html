@@ -1,0 +1,90 @@
+{{ define "main" }}
+<!-- PAGE HERO (TODO: eigenes Foto statt Platzhalter) -->
+<section class="page-hero">
+  <img class="page-hero-bg" src="{{ "images/cycling-hero.jpg" | relURL }}" alt="" style="object-position: 50% 60%;">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Training</div>
+    <h1 class="page-hero-title">Bike</h1>
+    <p class="page-hero-sub">Spinning indoors, group rides outdoors — whatever the London weather does.</p>
+  </div>
+</section>
+
+<!-- TODO: Texte, Zeiten, Orte und Regeln sind Platzhalter -->
+<section class="content-section" id="intro">
+  <div class="intro">
+    <div class="text-block">
+      <span class="label">Bike</span>
+      <h2>Cycling in London takes some planning</h2>
+      <p>Cycling in London comes with its challenges. Small student rooms make storing, maintaining and cleaning a road bike difficult, the green roads are a long way away, traffic can be dangerous — and the academic year starts just when the days get short and the weather turns.</p>
+      <p>There is a good alternative: indoor cycling. ICTRI meets once a week for spinning together. You can also use the Wattbikes at the Ethos gym, which record precise power data — ideal for focused training sessions on your own.</p>
+      <p>And when the weather is kind, we ride outdoors: laps in Richmond Park, in a group, at a pace everyone can hold.</p>
+    </div>
+    <div class="big-num" aria-hidden="true">02</div>
+  </div>
+</section>
+<section class="content-section bg-off" id="spinning">
+  <div class="split">
+    <div class="text-block">
+      <span class="label">Spinning</span>
+      <h2>Indoor sessions, outdoor results</h2>
+      <p>Every Tuesday evening we meet at the Ethos gym for a spinning session. Music, structured intervals and a group to keep you honest — no matter the weather or the time of year.</p>
+      <p>No clip-in shoes or special kit needed: pick a bike, set the saddle and go. The session is a great base for the group rides.</p>
+      <div class="keyfacts">
+        <dl class="kf-main">
+          <div><dt>When</dt><dd><strong>Tue 20:00</strong><span>60 minutes, weekly</span></dd></div>
+          <div><dt>Where</dt><dd><strong>Ethos gym</strong><span>Spinning studio</span></dd></div>
+        </dl>
+        <dl class="kf-minor">
+          <div><dt>Who</dt><dd>All levels — no experience needed</dd></div>
+          <div><dt>Bring</dt><dd>Water, towel, trainers</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="split-media"><img src="{{ "images/spinning-example.jpg" | relURL }}" alt="Spinning session" style="object-position: center 50%;" loading="lazy"></div>
+  </div>
+</section>
+<section class="content-section" id="rides">
+  <div class="split split--rev">
+    <div class="text-block">
+      <span class="label">Group rides</span>
+      <h2>Laps in Richmond Park</h2>
+      <p>On Wednesday evenings we ride laps of Richmond Park together. The park is closed to most traffic at the quiet hours and a lap is roughly 11 km — perfect for learning to ride in a group.</p>
+      <p>Groups are split by pace and nobody gets left behind. We ride predictably, call out hazards and look after each other.</p>
+      <div class="callout"><strong>Safety first.</strong> Helmets are compulsory. In autumn and winter bring front and rear lights. Check tyres, brakes and a spare tube before you come.</div>
+      <div class="keyfacts">
+        <dl class="kf-main">
+          <div><dt>When</dt><dd><strong>Wed 18:00</strong><span>Weekly, weather permitting</span></dd></div>
+          <div><dt>Where</dt><dd><strong>Richmond Park</strong><span>Meeting point tbc</span></dd></div>
+        </dl>
+        <dl class="kf-minor">
+          <div><dt>Who</dt><dd>Every level — we split into pace groups</dd></div>
+          <div><dt>Bring</dt><dd>Road or hybrid bike, helmet, lights</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="split-media"><img src="{{ "images/group-ride-example.jpg" | relURL }}" alt="Group ride" style="object-position: 60% 60%;" loading="lazy"></div>
+  </div>
+</section>
+<!-- FAQ (Fragen und Antworten stehen in data/faq/bike.yaml) -->
+{{ partial "faq.html" (dict "key" "bike" "title" "Cycling questions" "bg" " bg-off") }}
+
+<a href="{{ "beyond/" | relURL }}" class="disc-cross-link">
+  <div class="dcl-main">
+    <span class="dcl-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+    <div>
+      <div class="dcl-title">Want to get more out of your training?</div>
+      <div class="dcl-sub">Gear, strength training, recovery and nutrition — everything around the sessions that makes you faster.</div>
+    </div>
+  </div>
+  <span class="arrow-link">Explore Beyond</span>
+</a>
+
+<section class="join" id="join">
+  <div class="join-main">
+    <h2>Want to ride with ICTRI?</h2>
+    <p class="wide">Get in touch or join the club. You do not need to do all three disciplines to join our bike sessions.</p>
+  </div>
+  <a href="{{ "about/#join" | relURL }}" class="btn-white">Join or get in touch →</a>
+</section>
+{{ end }}

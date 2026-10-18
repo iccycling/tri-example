@@ -1,0 +1,3 @@
+{{- /* Bild zuschneiden. Parameter: dict "res" <Bild> "size" "640x512". Die Standard-Vorschaukarte wird mittig, Fotos "smart" zugeschnitten. */ -}}
+{{- $a := "Smart" }}{{ if or (strings.HasSuffix .res.Name "social-card.jpg") (strings.HasSuffix .res.Name "card-default.jpg") }}{{ $a = "Center" }}{{ end -}}
+{{- return (.res.Fill (printf "%s %s q80" .size $a)) -}}

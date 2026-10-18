@@ -1,0 +1,9 @@
+{{- $exp := partial "news-expired.html" . -}}
+<a href="{{ .RelPermalink }}" class="nb-news-row{{ if $exp }} nb-news-row--archived{{ end }}">
+  <time class="nb-news-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+  <span>
+    <span class="nb-news-title">{{ .Title }}</span>
+    <span class="nb-news-summary">{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 140 }}{{ end }}</span>
+  </span>
+  <span class="nb-arrow" aria-hidden="true">→</span>
+</a>

@@ -1,0 +1,24 @@
+{{- /* param: dict "page" <Seite> "static" <bool: weiße Leiste (Unterseiten) oder transparent (Startseite)> */ -}}
+{{- $p := .page -}}
+{{- $nav := $p.Params.nav -}}
+{{- if not $nav }}{{ $nav = index (dict "committee" "about" "blog" "news" "news" "news" "authors" "news" "tags" "news") $p.Section | default "" }}{{ end -}}
+{{- $item := $p.Params.navitem | default "" -}}
+{{- $home := site.Home.RelPermalink -}}
+<nav aria-label="Main"{{ if .static }} class="nav--static"{{ end }}>
+  <a href="{{ $home }}" class="nav-logo"><img src="{{ "images/ictri-archivo.svg" | relURL }}" alt="ICTRI"></a>
+  <ul class="nav-links">
+    <li><a href="{{ "about/" | relURL }}"{{ if eq $nav "about" }} class="active" aria-current="page"{{ end }}>About</a></li>
+    <li class="has-dropdown">
+      <button type="button" class="nav-dd-trigger{{ if eq $nav "training" }} active{{ end }}" aria-haspopup="true" aria-expanded="false" aria-controls="nav-train-menu">Training<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <ul class="nav-dropdown" id="nav-train-menu">
+        {{- range (slice (dict "s" "swim" "l" "Swim") (dict "s" "bike" "l" "Bike") (dict "s" "run" "l" "Run") (dict "s" "beyond" "l" "Beyond")) }}
+        <li><a href="{{ printf "%s/" .s | relURL }}"{{ if eq $item .s }} class="active" aria-current="page"{{ end }}>{{ .l }}</a></li>
+        {{- end }}
+      </ul>
+    </li>
+    <li><a href="{{ "racing/" | relURL }}"{{ if eq $nav "racing" }} class="active" aria-current="page"{{ end }}>Racing</a></li>
+    <li><a href="{{ $home }}#news"{{ if eq $nav "news" }} class="active" aria-current="page"{{ end }}>News &amp; Blog</a></li>
+  </ul>
+  <a href="{{ "about/#join" | relURL }}" class="nav-cta">Join</a>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>

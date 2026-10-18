@@ -1,0 +1,14 @@
+{{- /*
+  YouTube-Video mit Einwilligung. Es wird erst nach Klick eine Verbindung zu YouTube aufgebaut.
+  {{< youtube VIDEO_ID >}}   oder   {{< youtube id="VIDEO_ID" title="Titel des Videos" >}}
+*/ -}}
+{{- $id := .Get "id" | default (.Get 0) -}}
+{{- $title := .Get "title" | default "YouTube video" -}}
+<div class="embed embed--youtube" data-embed data-embed-src="https://www.youtube-nocookie.com/embed/{{ $id }}?autoplay=1&amp;rel=0" data-embed-title="{{ $title }}" data-embed-ratio="16 / 9">
+  <div class="embed-consent">
+    <svg class="embed-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    <strong class="embed-title">{{ $title }}</strong>
+    <p>This video is hosted by YouTube (Google). If you load it, your browser connects to YouTube, your IP address and other data may be transmitted to Google, and cookies may be set. <a href="{{ "privacy/#embeds" | relURL }}">Details</a></p>
+    <button type="button" class="btn-accent embed-btn">Load video</button>
+  </div>
+</div>

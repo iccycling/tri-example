@@ -1,0 +1,11 @@
+<a href="{{ .RelPermalink }}" class="bcard">
+  <div class="bcard-media">
+    {{- with partial "preview.html" . }}{{ $im := partial "fill.html" (dict "res" . "size" "640x512") }}<img src="{{ $im.RelPermalink }}" width="{{ $im.Width }}" height="{{ $im.Height }}" alt="" loading="lazy">{{ else }}<span class="bcard-ph" aria-hidden="true">IC TRI</span>{{ end -}}
+  </div>
+  <div class="bcard-body">
+    <div class="tag-row">{{ range .GetTerms "tags" }}<span class="tag-pill">{{ .LinkTitle }}</span>{{ end }}</div>
+    <h3 class="bcard-title">{{ .Title }}</h3>
+    <p class="bcard-excerpt">{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 130 }}{{ end }}</p>
+    <div class="bcard-meta">{{ .Date.Format "2 Jan 2006" }} · {{ .ReadingTime }} min read</div>
+  </div>
+</a>

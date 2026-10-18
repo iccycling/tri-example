@@ -1,0 +1,178 @@
+{{ define "header" }}<!-- Startseite: Navigation liegt im Hero (siehe unten) -->{{ end }}
+
+{{ define "main" }}
+<!-- HERO -->
+<section class="hero">
+  {{ partial "nav.html" (dict "page" . "static" false) }}
+  {{ partial "drawer.html" . }}
+  <!-- TODO: Hero-Bild manuell ersetzen -->
+  <img class="hero-img" src="{{ "images/YOUR-TRI-PHOTO.jpg" | relURL }}" alt="ICTRI Racing" style="object-position: center 50%;">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Imperial College · London</div>
+      <h1 class="hero-title">
+        Imperial<br>College<br>Triathlon<br>Club
+      </h1>
+    </div>
+    <div class="hero-right">
+      <p class="hero-desc">
+        All levels welcome — swim, bike, run, together.
+      </p>
+      <a href="{{ "about/#join" | relURL }}" class="btn-white">Join the Club</a>
+    </div>
+  </div>
+  <div class="hero-scroll-line"></div>
+</section>
+
+
+<!-- DISCIPLINES -->
+<!-- TODO: Zeiten/Orte prüfen — Bike (Ethos, Richmond Park) und Run (Hyde Park) stammen von dir; Swim-Zeit und Run-Zeit sind Platzhalter -->
+<div class="disciplines disciplines--numbered" id="train">
+  <a class="disc-item" href="{{ "swim/" | relURL }}">
+    <div class="disc-number" aria-hidden="true">01</div>
+    <div class="disc-title">Swim</div>
+    <p class="disc-desc">Weekly pool sessions with structured sets for every level. Technique-focused, coached, and open to non-swimmers too.</p>
+    <ul class="disc-sessions">
+      <li><span class="sess-when">Mon 19:00</span><span class="sess-what">Pool session · coached sets</span></li>
+    </ul>
+    <span class="disc-arrow" aria-hidden="true"></span>
+  </a>
+  <a class="disc-item" href="{{ "bike/" | relURL }}">
+    <div class="disc-number" aria-hidden="true">02</div>
+    <div class="disc-title">Bike</div>
+    <p class="disc-desc">Group rides and turbo sessions to build endurance and bike handling, from your first ride to race pace.</p>
+    <ul class="disc-sessions">
+      <li><span class="sess-when">Tue 20:00</span><span class="sess-what">Spinning · Ethos gym</span></li>
+      <li><span class="sess-when">Wed 18:00</span><span class="sess-what">Laps · Richmond Park</span></li>
+    </ul>
+    <span class="disc-arrow" aria-hidden="true"></span>
+  </a>
+  <a class="disc-item" href="{{ "run/" | relURL }}">
+    <div class="disc-number" aria-hidden="true">03</div>
+    <div class="disc-title">Run</div>
+    <p class="disc-desc">Park sessions covering speed, endurance, and brick runs off the bike.</p>
+    <ul class="disc-sessions">
+      <li><span class="sess-when">Fri 07:30</span><span class="sess-what">Group run · Hyde Park</span></li>
+    </ul>
+    <span class="disc-arrow" aria-hidden="true"></span>
+  </a>
+</div>
+
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-image-wrap">
+    <img src="{{ "images/4alt.jpg" | relURL }}" alt="ICTRI Group Session">
+  </div>
+  <div class="about-content">
+    <span class="label">About the Club</span>
+    <h2>Train.<br>Race.<br>Together.</h2>
+    <p>ICTRI is a student-led community at Imperial College London. Whether you're chasing a podium or your first triathlon, there's a place for you. Powered by the Student Union.</p>
+    <div class="stats">
+      <div>
+        <div class="stat-n">30+</div>
+        <div class="stat-l">Members</div>
+      </div>
+      <div>
+        <div class="stat-n">3×</div>
+        <div class="stat-l">Weekly sessions</div>
+      </div>
+      <div>
+        <div class="stat-n">3</div>
+        <div class="stat-l">Disciplines</div>
+      </div>
+    </div>
+    <a href="{{ "about/" | relURL }}" class="arrow-link">Learn more about the club</a>
+  </div>
+</section>
+
+
+<!-- JOIN -->
+<section class="join" id="join">
+  <div>
+    <h2>Ready to tri?</h2>
+    <p>Join through the Imperial College Union. Membership gets you access to every session, race, event, and social.</p>
+  </div>
+  <a href="{{ "about/#join" | relURL }}" class="btn-white">Become a Member →</a>
+</section>
+
+
+<!-- NEWS + BLOG (aus content/news und content/blog) -->
+<section class="news" id="news">
+  <div class="section-header">
+    <h2>News &amp; Blog</h2>
+  </div>
+
+  <!-- News: nur nicht abgelaufene, max. 3 -->
+  {{- $active := slice }}
+  {{- range (site.GetPage "/news").Pages.ByDate.Reverse }}{{ if not (partial "news-expired.html" .) }}{{ $active = $active | append . }}{{ end }}{{ end }}
+  <div class="nb-sub">
+    <span class="label">Latest news</span>
+    <a href="{{ "news/" | relURL }}" class="text-link">All news →</a>
+  </div>
+  {{- if $active }}
+  <ul class="nb-news">
+    {{- range first 3 $active }}
+    <li>{{ partial "news-row.html" . }}</li>
+    {{- end }}
+  </ul>
+  {{- else }}
+  <p class="nb-empty">No current news — have a look at the <a href="{{ "news/" | relURL }}">archive</a>.</p>
+  {{- end }}
+
+  <!-- Blog: neuester Beitrag groß (mit Vorschaubild), dann zwei weitere -->
+  <div class="nb-sub nb-sub--blog">
+    <span class="label">From the blog</span>
+    <a href="{{ "blog/" | relURL }}" class="text-link">All posts →</a>
+  </div>
+  {{- $posts := first 3 (site.GetPage "/blog").Pages.ByDate.Reverse }}
+  {{- if $posts }}
+  <div class="nb-blog">
+    {{- range $i, $p := $posts }}
+    {{- if eq $i 0 }}
+    {{- $cover := partial "preview.html" $p }}
+    <a href="{{ $p.RelPermalink }}" class="nb-card nb-card--featured{{ if not $cover }} nb-card--nomedia{{ end }}{{ if and $cover (lt $cover.Width $cover.Height) }} nb-card--portrait{{ end }}">
+      {{- with $cover }}
+      {{- $im := .Fit "1400x1200 q80" }}
+      <div class="nb-media"><img src="{{ $im.RelPermalink }}" width="{{ $im.Width }}" height="{{ $im.Height }}" alt=""></div>
+      {{- end }}
+      <div class="nb-body">
+        <div class="tag-row">{{ range $p.GetTerms "tags" }}<span class="tag-pill">{{ .LinkTitle }}</span>{{ end }}</div>
+        <h3 class="nb-title">{{ $p.Title }}</h3>
+        <p class="nb-excerpt">{{ with $p.Params.summary }}{{ . }}{{ else }}{{ $p.Summary | plainify | truncate 170 }}{{ end }}</p>
+        <div class="nb-byline">{{ $p.Date.Format "2 Jan 2006" }} · {{ $p.ReadingTime }} min read</div>
+      </div>
+    </a>
+    {{- else }}
+    <a href="{{ $p.RelPermalink }}" class="nb-card">
+      <div class="nb-body">
+        <div class="tag-row">{{ range $p.GetTerms "tags" }}<span class="tag-pill">{{ .LinkTitle }}</span>{{ end }}</div>
+        <h3 class="nb-title">{{ $p.Title }}</h3>
+        <p class="nb-excerpt">{{ with $p.Params.summary }}{{ . }}{{ else }}{{ $p.Summary | plainify | truncate 110 }}{{ end }}</p>
+        <div class="nb-byline">{{ $p.Date.Format "2 Jan 2006" }} · {{ $p.ReadingTime }} min read</div>
+      </div>
+    </a>
+    {{- end }}
+    {{- end }}
+  </div>
+  <a href="{{ "blog/" | relURL }}" class="arrow-link nb-more">All posts</a>
+  {{- else }}
+  <p class="nb-empty">No posts yet.</p>
+  {{- end }}
+</section>
+
+
+<!-- INSTAGRAM -->
+<div class="instagram instagram--cta">
+  <svg class="ig-icon" width="60" height="60" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M320.3 205C256.8 204.8 205.2 256.2 205 319.7C204.8 383.2 256.2 434.8 319.7 435C383.2 435.2 434.8 383.8 435 320.3C435.2 256.8 383.8 205.2 320.3 205zM319.7 245.4C360.9 245.2 394.4 278.5 394.6 319.7C394.8 360.9 361.5 394.4 320.3 394.6C279.1 394.8 245.6 361.5 245.4 320.3C245.2 279.1 278.5 245.6 319.7 245.4zM413.1 200.3C413.1 185.5 425.1 173.5 439.9 173.5C454.7 173.5 466.7 185.5 466.7 200.3C466.7 215.1 454.7 227.1 439.9 227.1C425.1 227.1 413.1 215.1 413.1 200.3zM542.8 227.5C541.1 191.6 532.9 159.8 506.6 133.6C480.4 107.4 448.6 99.2 412.7 97.4C375.7 95.3 264.8 95.3 227.8 97.4C192 99.1 160.2 107.3 133.9 133.5C107.6 159.7 99.5 191.5 97.7 227.4C95.6 264.4 95.6 375.3 97.7 412.3C99.4 448.2 107.6 480 133.9 506.2C160.2 532.4 191.9 540.6 227.8 542.4C264.8 544.5 375.7 544.5 412.7 542.4C448.6 540.7 480.4 532.5 506.6 506.2C532.8 480 541 448.2 542.8 412.3C544.9 375.3 544.9 264.5 542.8 227.5zM495 452C487.2 471.6 472.1 486.7 452.4 494.6C422.9 506.3 352.9 503.6 320.3 503.6C287.7 503.6 217.6 506.2 188.2 494.6C168.6 486.8 153.5 471.7 145.6 452C133.9 422.5 136.6 352.5 136.6 319.9C136.6 287.3 134 217.2 145.6 187.8C153.4 168.2 168.5 153.1 188.2 145.2C217.7 133.5 287.7 136.2 320.3 136.2C352.9 136.2 423 133.6 452.4 145.2C472 153 487.1 168.1 495 187.8C506.7 217.3 504 287.3 504 319.9C504 352.5 506.7 422.6 495 452z"/></svg>
+  <div>
+    <div class="ig-handle">{{ site.Params.instagramHandle }}</div>
+    <div class="ig-sub">Session updates, race results, and club highlights.</div>
+  </div>
+  <a href="{{ site.Params.instagram }}" target="_blank" rel="noopener" class="text-link">Follow on Instagram →</a>
+</div>
+
+
+<!-- FOOTER -->
+{{ end }}

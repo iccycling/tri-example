@@ -1,0 +1,18 @@
+# {{ site.Title }}
+
+> {{ site.Params.description }}
+
+ICTRI is a student-run triathlon club of Imperial College Union at Imperial College London. Training is open to students, staff and alumni of all levels.
+
+## Main pages
+{{ range where site.RegularPages "Type" "pages" }}- [{{ .Title }}]({{ .Permalink }}){{ with .Description }}: {{ . }}{{ end }}
+{{ end }}
+## Blog
+{{ range first 10 (site.GetPage "/blog").Pages.ByDate.Reverse }}- [{{ .Title }}]({{ .Permalink }}){{ with .Params.summary }}: {{ . }}{{ end }}
+{{ end }}
+## News
+{{ range first 10 (site.GetPage "/news").Pages.ByDate.Reverse }}{{ if not (partial "news-expired.html" .) }}- [{{ .Title }}]({{ .Permalink }}){{ with .Params.summary }}: {{ . }}{{ end }}
+{{ end }}{{ end }}
+## Contact
+- Instagram: {{ site.Params.instagram }}
+- Contact options: {{ "about/#contact" | absURL }}

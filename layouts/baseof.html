@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale }}">
+{{ partial "head.html" . }}
+<body class="{{ with .Section }}section-{{ . }}{{ else }}page-{{ .Kind }}{{ end }}">
+<a class="skip-link" href="#main">Skip to content</a>
+
+{{ block "header" . }}
+{{ partial "nav.html" (dict "page" . "static" true) }}
+{{ partial "drawer.html" . }}
+{{ end }}
+
+<main id="main" tabindex="-1">
+{{ block "main" . }}{{ end }}
+</main>
+
+{{ partial "footer.html" . }}
+
+{{ $js := resources.Get "main.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+{{ define "main" }}
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <img class="page-hero-bg" src="{{ "images/club-hero.jpg" | relURL }}" alt="" style="object-position: 60% 60%;">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Imperial College Triathlon Club</div>
+    <h1 class="page-hero-title">About the Club</h1>
+    <p class="page-hero-sub">Student-run, Union-backed, and open to every athlete at Imperial — from your first length to race day.</p>
+  </div>
+</section>
+
+<!-- TODO: Texte, Namen, Links und Partner sind Platzhalter -->
+<!-- WHO WE ARE + COMMITTEE -->
+<section class="content-section" id="committee">
+  <div class="split">
+    <div class="text-block">
+      <span class="label">Who we are</span>
+      <h2>A club for everyone who wants to tri</h2>
+      <p>ICTRI is a student-led triathlon club at Imperial College London, affiliated with Imperial College Union. We swim, bike and run together — weekly sessions, open-water swims, BUCS races and plenty of socials in between.</p>
+      <p>You do not need to be fast, or to own a race bike. Some of us are chasing podiums, others are here to try a triathlon once. Everyone trains together.</p>
+      <p>The club is run entirely by students, so it is shaped by whoever joins. Want to organise a session or plan a trip? Just say so.</p>
+    </div>
+    <figure class="split-media"><img src="{{ "images/4alt.jpg" | relURL }}" alt="ICTRI members" loading="lazy"><figcaption>ICTRI members, 2026</figcaption></figure>
+  </div>
+
+  <div class="people-head">
+    <h3>Meet the committee</h3>
+    <p>Click a face to read more.</p>
+  </div>
+  {{ partial "committee-row.html" . }}
+</section>
+
+<!-- WHAT WE DO -->
+<section class="content-section bg-off">
+  <span class="label">What we do</span>
+  <h2>Train. Race. Hang out.</h2>
+  <div class="features features--3">
+    <div class="feature"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Training</h3><p>Weekly swim, bike and run sessions for every level — coached where it counts, social everywhere.</p>
+      <div class="feature-links"><a href="{{ "swim/" | relURL }}" class="arrow-link">Swim</a><a href="{{ "bike/" | relURL }}" class="arrow-link">Bike</a><a href="{{ "run/" | relURL }}" class="arrow-link">Run</a><a href="{{ "beyond/" | relURL }}" class="arrow-link">Beyond</a></div></div>
+    <div class="feature"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg><h3>Racing</h3><p>BUCS and local events. Racing is optional — we help with entries, travel and company on race day.</p>
+      <a href="{{ "racing/" | relURL }}" class="arrow-link">Racing</a></div>
+    <div class="feature"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/></svg><h3>Coaching</h3><p>Looking for a coach, for a training plan or advice? We try to find a match. Get in contact.</p>
+      <a href="#contact" class="arrow-link">Get in touch</a></div>
+    <div class="feature"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg><h3>Science &amp; Tech</h3><p>Triathlon is booming, and Imperial is the place to combine a passion for sport with excellence in STEM, health and business — from aero testing to sports science.</p></div>
+    <div class="feature"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><h3>Socials</h3><p>Coffee after sessions, pub nights and an annual trip. The best part of a club happens off the course.</p></div>
+    <div class="feature"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg><h3>Club kit</h3><p>Tri suits, caps and hoodies in club colours, ordered together. Keep an eye on the news for kit drops.</p></div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="join" id="join">
+  <div class="join-main">
+    <h2>Join ICTRI</h2>
+    <p>Membership is open to everybody at Imperial — students, staff and alumni. Everything is handled through the official Imperial College Union website.</p>
+    <ol class="join-steps">
+      <li><b>1</b><span><strong>Buy club membership</strong> for ICTRI on the Union website.</span></li>
+      <li><b>2</b><span><strong>Add Imperial Athletes membership</strong> for sports facilities and BUCS.</span></li>
+      <li><b>3</b><span><strong>Get added to the WhatsApp group</strong> and come to your first session.</span></li>
+    </ol>
+  </div>
+  <a href="{{ site.Params.union }}" target="_blank" rel="noopener" class="btn-white">Join via the Union<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
+</section>
+
+<!-- FAQ (Fragen und Antworten stehen in data/faq/about.yaml) -->
+{{ partial "faq.html" (dict "key" "about" "title" "Good to know before you join" "bg" "") }}
+
+<!-- ALUMNI -->
+<section class="content-section bg-off" id="alumni">
+  <div class="two-col">
+    <div>
+      <span class="label">Alumni</span>
+      <h2>Studied at Imperial? You are welcome here.</h2>
+    </div>
+    <div class="text-block">
+      <p>Many people discover triathlon after university. We have no formal alumni programme, but we are happy to stay in touch — whether you want advice on getting started or just want to follow along.</p>
+      <a href="#contact" class="arrow-link">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS & AFFILIATES -->
+<!-- TODO: Athletes-Link prüfen; weitere Logos: einfach ein <a class="plogo"> im Band ergänzen -->
+<section class="content-section" id="partners">
+  <span class="label">Partners &amp; sponsoring</span>
+  <div class="partners-intro">
+    <div class="text-block">
+      <h2>Support ICTRI</h2>
+      <p>We are student-run and member-funded. Whether you are a company, an alum or simply a fan of the sport — sponsorship helps us keep sessions affordable, buy equipment and get more students to the start line. Interested? Drop us a line.</p>
+      <a href="#contact" class="arrow-link arrow-link--down">Get in touch</a>
+    </div>
+    <div>
+      <h3 class="perks-title">Gain visibility as a partner</h3>
+      <ul class="perks">
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg><span><strong>On our kit, website and social media</strong>Your logo on club kit, in the footer of every page, in our news and on our social channels.</span></li>
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span><strong>At our events</strong>Presence at race days, socials and welcome events.</span></li>
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span><strong>In front of the right people</strong>Direct reach to hundreds of students and alumni who train, race and travel.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="partner-wrap">
+    <span class="label">Partners &amp; affiliates</span>
+    <div class="partner-band">
+      <a class="plogo" href="https://www.imperial.ac.uk/" target="_blank" rel="noopener" style="--h:24px"><img src="{{ "images/partner-imperial-college-london.png" | relURL }}" alt="Imperial College London"></a>
+      <a class="plogo" href="{{ site.Params.union }}" target="_blank" rel="noopener" style="--h:44px"><img src="{{ "images/partner-imperial-college-union.svg" | relURL }}" alt="Imperial College Union"></a>
+      <a class="plogo" href="{{ site.Params.union }}" target="_blank" rel="noopener" style="--h:48px"><img src="{{ "images/partner-imperial-athletes.webp" | relURL }}" alt="Imperial Athletes"></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="content-section bg-off" id="contact">
+  <span class="label">Get in touch</span>
+  <h2>Questions? Just ask.</h2>
+  <div class="features">
+    <a class="feature" href="mailto:{{ site.Params.email }}"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><h3>Email</h3><p>{{ site.Params.email }}</p></a>
+    <a class="feature" href="{{ site.Params.instagram }}" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg><h3>Instagram</h3><p>{{ site.Params.instagramHandle }} — DM us anytime</p></a>
+    <a class="feature" href="#" data-wa-trigger><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg><h3>WhatsApp</h3><p>Members-only group chat</p></a>
+    <a class="feature" href="{{ site.Params.union }}" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg><h3>Imperial College Union <svg class="ico ico--inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></h3><p>Official membership &amp; sign-up</p></a>
+  </div>
+  <p class="also">Also find us on <a href="#" target="_blank" rel="noopener"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M286.4 64L135 356L224.2 356L286.4 239.9L348.1 356L436.6 356L286.4 64zM436.6 356L392.7 444.2L348.1 356L280.5 356L392.7 576L504.2 356L436.6 356z"/></svg>Strava</a></p>
+</section>
+{{ end }}

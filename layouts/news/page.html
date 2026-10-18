@@ -1,0 +1,19 @@
+{{ define "main" }}
+{{- $exp := partial "news-expired.html" . -}}
+<article>
+  <header class="post-head">
+    <span class="label">News</span>
+    <h1>{{ .Title }}</h1>
+    <div class="post-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+      {{ with .Params.authors }}{{ partial "authors-line.html" $ }}{{ end }}
+    </div>
+  </header>
+  {{- if $exp }}<p class="post-notice">This news item has expired and is kept here as an archive.</p>{{ end }}
+  <div class="prose">{{ .Content }}</div>
+  <div class="post-foot">
+    {{ partial "share.html" . }}
+    <p><a class="arrow-link arrow-link--back" href="{{ (site.GetPage "/news").RelPermalink }}">All news</a></p>
+  </div>
+</article>
+{{ end }}

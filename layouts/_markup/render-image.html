@@ -1,0 +1,10 @@
+{{- /* Markdown-Bilder: Dateien im Beitrags-Ordner werden verkleinert (max. 1600 px) und lazy geladen */ -}}
+{{- $dest := .Destination -}}
+{{- $r := "" -}}
+{{- if not (urls.Parse $dest).Scheme }}{{ $r = .PageInner.Resources.Get $dest }}{{ end -}}
+{{- if and $r (in (slice "jpeg" "png" "webp") $r.MediaType.SubType) -}}
+  {{- if gt $r.Width 1600 }}{{ $r = $r.Resize "1600x q82" }}{{ end -}}
+  <img src="{{ $r.RelPermalink }}" width="{{ $r.Width }}" height="{{ $r.Height }}" alt="{{ .PlainText }}" loading="lazy"{{ with .Title }} title="{{ . }}"{{ end }}>
+{{- else -}}
+  <img src="{{ if $r }}{{ $r.RelPermalink }}{{ else }}{{ $dest | safeURL }}{{ end }}" alt="{{ .PlainText }}" loading="lazy"{{ with .Title }} title="{{ . }}"{{ end }}>
+{{- end -}}

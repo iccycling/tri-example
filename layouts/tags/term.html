@@ -1,0 +1,9 @@
+{{ define "main" }}
+<header class="page-head">
+  <span class="label">Topic</span>
+  <h1>{{ .Title }}</h1>
+  <p class="page-head-text">{{ len .Pages }} {{ if eq (len .Pages) 1 }}post{{ else }}posts{{ end }} tagged “{{ .Title }}”.</p>
+  <div class="tag-filter"><a href="{{ (site.GetPage "/blog").RelPermalink }}">← All posts</a></div>
+</header>
+<div class="bgrid">{{ range .Pages.ByDate.Reverse }}{{ partial "blog-card.html" . }}{{ end }}</div>
+{{ end }}

@@ -1,0 +1,16 @@
+{{- /*
+  Instagram-Beitrag mit Einwilligung (ohne Bildunterschrift). Erst nach Klick wird eine Verbindung zu Instagram aufgebaut.
+  {{< instagram CODE >}}   (CODE steht in der Adresse: instagram.com/p/CODE/ )
+  Reel: {{< instagram id="CODE" type="reel" >}}   Höhe anpassen: height="700"
+*/ -}}
+{{- $id := .Get "id" | default (.Get 0) -}}
+{{- $type := .Get "type" | default "p" -}}
+{{- $height := .Get "height" | default "640" -}}
+<div class="embed embed--instagram" data-embed data-embed-src="https://www.instagram.com/{{ $type }}/{{ $id }}/embed" data-embed-title="Instagram post" data-embed-height="{{ $height }}">
+  <div class="embed-consent">
+    <svg class="embed-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+    <strong class="embed-title">Instagram post</strong>
+    <p>Loading this post connects you to Instagram (Meta). Data such as your IP address may be transmitted and cookies may be set. <a href="{{ "privacy/#embeds" | relURL }}">Details</a></p>
+    <button type="button" class="btn-accent embed-btn">Load post</button>
+  </div>
+</div>

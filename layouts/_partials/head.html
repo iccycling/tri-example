@@ -1,0 +1,49 @@
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0000A2">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+{{- if site.Params.csp }}
+<!-- Schutz vor fremdem Code: nur eigene Skripte/Schriften/Bilder; iframes nur von den erlaubten Hosts (hugo.toml → params.embedHosts) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src {{ delimit site.Params.embedHosts " " }}">
+{{- end }}
+{{- $title := site.Title }}{{ if not .IsHome }}{{ $title = printf "%s — %s" .Title site.Title }}{{ end }}
+<title>{{ $title }}</title>
+{{- $desc := .Description | default (.Summary | plainify | truncate 160) | default site.Params.description }}
+<meta name="description" content="{{ $desc }}">
+{{- if site.Params.noindex }}
+<!-- Prototyp: nicht in Suchmaschinen aufnehmen (hugo.toml → params.noindex) -->
+<meta name="robots" content="noindex, nofollow">
+{{- else }}
+<meta name="robots" content="index, follow, max-image-preview:large">
+{{- end }}
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="32x32">
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
+
+<!-- Open Graph / Link-Vorschau -->
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="{{ .Title | default site.Title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="{{ if in (slice "blog" "news") .Section }}{{ if .IsPage }}article{{ else }}website{{ end }}{{ else }}website{{ end }}">
+{{- $img := "" }}
+{{- with partial "share-image.html" . }}{{ $img = (partial "fill.html" (dict "res" . "size" "1200x630")).Permalink }}{{ end }}
+<meta property="og:image" content="{{ $img }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+{{- if and .IsPage (in (slice "blog" "news") .Section) }}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+{{- end }}
+<link rel="alternate" type="application/rss+xml" href="{{ "blog/index.xml" | absURL }}" title="{{ site.Title }} — Blog">
+
+{{ $css := resources.Get "main.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+<!-- Fonts: selbst gehostet (static/fonts). @font-face steht in main.css -->
+<link rel="preload" href="{{ "fonts/archivo-900.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ "fonts/inter-400.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+{{ partial "schema.html" . }}
+</head>

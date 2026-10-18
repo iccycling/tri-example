@@ -1,0 +1,7 @@
+{{- $authors := .Params.authors -}}
+{{- with $authors -}}
+<span class="byline-authors">by {{ range $i, $a := . -}}
+  {{- if $i }}{{ if eq $i (sub (len $authors) 1) }} and {{ else }}, {{ end }}{{ end -}}
+  {{- with site.GetPage (printf "/authors/%s" ($a | urlize)) }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ else }}{{ $a }}{{ end -}}
+{{- end }}</span>
+{{- end -}}

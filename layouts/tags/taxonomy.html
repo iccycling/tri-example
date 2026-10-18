@@ -1,0 +1,9 @@
+{{ define "main" }}
+<header class="page-head">
+  <span class="label">Topics</span>
+  <h1>All topics</h1>
+  <div class="tag-filter">
+    {{- range .Data.Terms.Alphabetical }}<a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }} <small>{{ .Count }}</small></a>{{ end }}
+  </div>
+</header>
+{{ end }}

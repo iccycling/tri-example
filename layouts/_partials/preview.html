@@ -1,0 +1,7 @@
+{{- /* Vorschaubild für Karten (Blog-Übersicht, Startseite):
+       1. front matter  preview: "datei.jpg" (Datei im Beitragsordner)
+       2. sonst das dezente Standardbild assets/images/card-default.jpg */ -}}
+{{- $r := "" -}}
+{{- if .IsPage }}{{ with .Params.preview }}{{ $r = $.Resources.GetMatch . }}{{ end }}{{ end -}}
+{{- if not $r }}{{ $r = resources.Get "images/card-default.jpg" }}{{ end -}}
+{{- return $r -}}

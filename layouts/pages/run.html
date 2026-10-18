@@ -1,0 +1,68 @@
+{{ define "main" }}
+<!-- PAGE HERO (TODO: eigenes Foto statt Platzhalter) -->
+<section class="page-hero">
+  <img class="page-hero-bg" src="{{ "images/run-example.jpg" | relURL }}" alt="" style="object-position: center 40%;">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Training</div>
+    <h1 class="page-hero-title">Run</h1>
+    <p class="page-hero-sub">The most accessible discipline: a pair of shoes and you are ready.</p>
+  </div>
+</section>
+
+<!-- TODO: Texte, Zeiten, Orte und Regeln sind Platzhalter -->
+<section class="content-section" id="intro">
+  <div class="intro">
+    <div class="text-block">
+      <span class="label">Run</span>
+      <h2>Lace up and go</h2>
+      <p>Running is the most accessible sport in triathlon. You need a pair of shoes and a bit of time — no pool, no bike, no booking. That makes it the perfect place to start.</p>
+      <p>It is also the last discipline of a race, when tired legs from the bike meet everything you have left. The good news: you build that engine slowly, one easy run at a time.</p>
+      <p>Our runs are relaxed and social. We run together, talk, and finish with a coffee.</p>
+    </div>
+    <div class="big-num" aria-hidden="true">03</div>
+  </div>
+</section>
+<section class="content-section bg-off" id="group">
+  <div class="split">
+    <div class="text-block">
+      <span class="label">Running group</span>
+      <h2>The ICTRI run club</h2>
+      <p>Every Friday morning we run together in Hyde Park. We form groups by pace, so beginners and experienced runners can all join the same session and still meet at the end.</p>
+      <p>Most runs are 5–10 km at an easy, conversational pace. Now and then we add some strides or hills — always optional.</p>
+      <div class="keyfacts">
+        <dl class="kf-main">
+          <div><dt>When</dt><dd><strong>Fri 07:30</strong><span>About 60 minutes, weekly</span></dd></div>
+          <div><dt>Where</dt><dd><strong>Hyde Park</strong><span>Meeting point tbc</span></dd></div>
+        </dl>
+        <dl class="kf-minor">
+          <div><dt>Who</dt><dd>All paces — walk breaks are fine</dd></div>
+          <div><dt>Bring</dt><dd>Running shoes, reflective gear in the dark</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="split-media"><img src="{{ "images/runclub-example.jpg" | relURL }}" alt="Group run" style="object-position: center 50%;" loading="lazy"></div>
+  </div>
+</section>
+<!-- FAQ (Fragen und Antworten stehen in data/faq/run.yaml) -->
+{{ partial "faq.html" (dict "key" "run" "title" "Running questions" "bg" "") }}
+
+<a href="{{ "racing/" | relURL }}" class="disc-cross-link">
+  <div class="dcl-main">
+    <span class="dcl-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+    <div>
+      <div class="dcl-title">Ready for a start line?</div>
+      <div class="dcl-sub">From your first sprint to BUCS — how racing works in the club.</div>
+    </div>
+  </div>
+  <span class="arrow-link">Racing</span>
+</a>
+
+<section class="join" id="join">
+  <div class="join-main">
+    <h2>Want to run with ICTRI?</h2>
+    <p class="wide">Get in touch or join the club. You do not need to do all three disciplines to join our runs.</p>
+  </div>
+  <a href="{{ "about/#join" | relURL }}" class="btn-white">Join or get in touch →</a>
+</section>
+{{ end }}

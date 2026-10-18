@@ -1,0 +1,19 @@
+{{- /*
+  {{< photo src="bild.jpg" alt="…" caption="…" size="normal|wide|full" align="left|right" credit="Name" />}}
+  oder mit Markdown-Bildunterschrift:  {{< photo src="bild.jpg" >}}Text **fett**{{< /photo >}}
+  src = Dateiname im Beitrags-Ordner (oder Pfad aus static/, z. B. /images/x.jpg)
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- $caption := .Get "caption" -}}
+{{- if .Inner }}{{ $caption = .Inner | markdownify }}{{ end -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $size := .Get "size" | default "normal" -}}
+{{- $r := .Page.Resources.Get $src -}}
+<figure class="post-figure post-figure--{{ $size }}{{ with .Get "align" }} post-figure--{{ . }}{{ end }}">
+  {{- if and $r (in (slice "jpeg" "png" "webp") $r.MediaType.SubType) }}
+    {{- $s := $r.Resize "800x q82" }}{{ $m := $r.Resize "1200x q82" }}{{ $l := $r.Resize "1800x q82" }}
+    <img src="{{ $m.RelPermalink }}" srcset="{{ $s.RelPermalink }} 800w, {{ $m.RelPermalink }} 1200w, {{ $l.RelPermalink }} 1800w" sizes="(min-width: 1100px) 1000px, 100vw" width="{{ $m.Width }}" height="{{ $m.Height }}" alt="{{ $alt }}" loading="lazy">
+  {{- else if $r }}<img src="{{ $r.RelPermalink }}" alt="{{ $alt }}" loading="lazy">
+  {{- else }}<img src="{{ strings.TrimPrefix "/" $src | relURL }}" alt="{{ $alt }}" loading="lazy">{{ end }}
+  {{- with $caption }}<figcaption>{{ . }}{{ with $.Get "credit" }} <span class="credit">Photo: {{ . }}</span>{{ end }}</figcaption>{{ end }}
+</figure>

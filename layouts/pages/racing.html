@@ -1,0 +1,92 @@
+{{ define "main" }}
+<!-- PAGE HERO (TODO: eigenes Foto statt Platzhalter) -->
+<section class="page-hero">
+  <img class="page-hero-bg" src="{{ "images/race-hero.jpg" | relURL }}" alt="" style="object-position: 50% 55%;">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Racing</div>
+    <h1 class="page-hero-title">Racing</h1>
+    <p class="page-hero-sub">From your first sprint to the big distances — race with the club if you want to.</p>
+  </div>
+</section>
+
+<!-- TODO: Texte, Termine, Kosten und Regeln sind Platzhalter -->
+<section class="content-section" id="intro">
+  <div class="intro">
+    <div class="text-block">
+      <span class="label">Racing</span>
+      <h2>Triathlon is everywhere</h2>
+      <p>Triathlon is popular all over the world, and there are events of every distance almost everywhere you go. Racing is optional at ICTRI — but a start line is the best motivation to train.</p>
+      <p>You can race with the club or on your own. Ask around: somebody is usually planning an event and happy to share the journey and the car.</p>
+    </div>
+    <svg class="big-icon" viewBox="0 0 120 140" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M18 8v126"/><path d="M18 14c14-8 28-8 42 0s28 8 44 0v60c-16 8-30 8-44 0s-28-8-42 0z"/><g fill="currentColor" fill-opacity="0.35" stroke="none"><path d="M18 14c5-3 10-5 15-6v15c-5 1-10 3-15 6z"/><path d="M48 14c4 2 8 4 12 5v15c-5-1-9-3-14-5z"/><path d="M78 20c7 2 15 2 26-3v15c-11 5-19 5-26 3z"/><path d="M33 38c5-1 10 0 15 1v15c-5-1-10-2-15-1z"/><path d="M63 34c5 2 9 4 15 4v15c-6 0-10-2-15-4z"/><path d="M18 58c5-3 10-5 15-5v15c-5 0-10 2-15 5z"/><path d="M48 54c4 2 9 4 15 4v15c-6 0-11-2-15-4z"/><path d="M78 53c7 2 15 2 26-3v15c-11 5-19 5-26 3z"/></g></svg>
+  </div>
+  <div class="dists">
+    <div class="dist"><h3>Sprint</h3><small>Best first race</small><dl><div><dt>Swim</dt><dd>750 m</dd></div><div><dt>Bike</dt><dd>20 km</dd></div><div><dt>Run</dt><dd>5 km</dd></div></dl></div>
+    <div class="dist"><h3>Olympic</h3><small>Standard distance</small><dl><div><dt>Swim</dt><dd>1.5 km</dd></div><div><dt>Bike</dt><dd>40 km</dd></div><div><dt>Run</dt><dd>10 km</dd></div></dl></div>
+    <div class="dist"><h3>Half Ironman</h3><small>70.3 miles in total</small><dl><div><dt>Swim</dt><dd>1.9 km</dd></div><div><dt>Bike</dt><dd>90 km</dd></div><div><dt>Run</dt><dd>21.1 km</dd></div></dl></div>
+    <div class="dist"><h3>Ironman</h3><small>Full distance</small><dl><div><dt>Swim</dt><dd>3.8 km</dd></div><div><dt>Bike</dt><dd>180 km</dd></div><div><dt>Run</dt><dd>42.2 km</dd></div></dl></div>
+  </div>
+  <p class="dists-note">Distances are typical; every race differs slightly. New to triathlon? A super sprint (400 m / 10 km / 2.5 km) is a gentle way in.</p>
+</section>
+
+<!-- BUCS & LOCAL -->
+<section class="content-section bg-off" id="bucs">
+  <div class="split">
+    <div class="text-block">
+      <span class="label">BUCS &amp; local races</span>
+      <h2>We race, together</h2>
+      <p>The club takes part in a range of events during the year, from the BUCS championships to local races around London. Beginners and experienced athletes start side by side — and cheer each other on.</p>
+      <ul class="perks">
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span><strong>Travel together</strong>We organise shared transport, so nobody arrives alone at 6 a.m.</span></li>
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 17v2M13 11v2"/></svg><span><strong>Subsidised entries</strong>The club helps with entry fees for members who want to race.</span></li>
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg><span><strong>News in WhatsApp</strong>Concrete events and deadlines are announced in the members' WhatsApp group.</span></li>
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg><span><strong>Cheer and help out</strong>Not racing? Supporters and marshals are very welcome — and make the day.</span></li>
+      </ul>
+    </div>
+    <div class="split-media"><img src="{{ "images/race-example.jpg" | relURL }}" alt="Athletes at a race start" style="object-position: 55% 60%;" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- PERFORMANCE -->
+<section class="content-section" id="performance">
+  <div class="split split--rev">
+    <div class="text-block">
+      <span class="label">Performance</span>
+      <h2>Few sports leave so much room to optimise</h2>
+      <p>Finding the right training volume and methods for your own body, testing your fitness, fuelling well on race day, choosing the right material, down to aerodynamic tuning in the wind tunnel: triathlon rewards curiosity.</p>
+      <div class="callout"><strong>No programme, but good company.</strong> The club cannot offer concrete performance services. But as a leading engineering university, Imperial has plenty of people who love exactly these technical topics — and are happy to exchange ideas.</div>
+    </div>
+    <div class="text-block">
+      <ul class="perks perks--big">
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><span><strong>Training</strong>Volume, intensity, zones — what works for your body.</span></li>
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg><span><strong>Performance diagnostics</strong>Lactate, threshold or power tests show where you stand and set your training zones.</span></li>
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/></svg><span><strong>Fuelling</strong>What and when to eat and drink before and during a race — a skill you can train like any other.</span></li>
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg><span><strong>Material</strong>From second-hand bargains to the last watt on the bike.</span></li>
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg><span><strong>Aerodynamics</strong>Position, kit and the numbers behind them.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+{{ partial "faq.html" (dict "key" "racing" "title" "Racing questions" "bg" " bg-off") }}
+
+<a href="{{ "beyond/" | relURL }}" class="disc-cross-link">
+  <div class="dcl-main">
+    <span class="dcl-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+    <div>
+      <div class="dcl-title">Want to get more out of your training?</div>
+      <div class="dcl-sub">Training know-how, gear, strength, recovery and nutrition — everything around the sessions.</div>
+    </div>
+  </div>
+  <span class="arrow-link">Explore Beyond</span>
+</a>
+
+<section class="join" id="join">
+  <div class="join-main">
+    <h2>Want to race with ICTRI?</h2>
+    <p class="wide">Get in touch or join the club. Race days are better with friends at the start line.</p>
+  </div>
+  <a href="{{ "about/#join" | relURL }}" class="btn-white">Join or get in touch →</a>
+</section>
+{{ end }}

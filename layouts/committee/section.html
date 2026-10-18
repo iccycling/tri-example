@@ -1,0 +1,8 @@
+{{ define "main" }}
+<header class="page-head">
+  <span class="label">Committee</span>
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="page-head-text">{{ . }}</div>{{ end }}
+</header>
+<div class="people-wrap">{{ partial "committee-row.html" . }}</div>
+{{ end }}

@@ -1,0 +1,2 @@
+{{- /* true, wenn die News ein Ablaufdatum (expiryDate) hat, das vorbei ist */ -}}
+{{- return (and (not .ExpiryDate.IsZero) (lt .ExpiryDate now)) -}}

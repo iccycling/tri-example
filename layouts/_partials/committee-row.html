@@ -1,0 +1,10 @@
+{{- /* param: aktuelle Seite (optional, wird hervorgehoben) */ -}}
+{{- $cur := . -}}
+<div class="people">
+  {{- range (site.GetPage "/committee").Pages.ByWeight }}
+  <a href="{{ .RelPermalink }}" class="person{{ if eq .RelPermalink $cur.RelPermalink }} is-current{{ end }}"{{ if eq .RelPermalink $cur.RelPermalink }} aria-current="page"{{ end }}>
+    {{ partial "avatar.html" . }}
+    <b>{{ .Title }}</b><span>{{ .Params.role }}</span>
+  </a>
+  {{- end }}
+</div>

@@ -1,0 +1,5 @@
+{{- /* {{< callout type="info|tip|warning" title="Titel" >}}Markdown-Text{{< /callout >}} */ -}}
+<div class="callout callout--{{ .Get "type" | default "info" }}">
+  {{- with .Get "title" }}<strong class="callout-title">{{ . }}</strong>{{ end }}
+  {{ .Inner | markdownify }}
+</div>

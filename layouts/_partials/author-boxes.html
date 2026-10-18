@@ -1,0 +1,13 @@
+{{- $authors := .Params.authors -}}
+{{- $boxes := slice -}}
+{{- range $authors }}{{ with site.GetPage (printf "/authors/%s" (. | urlize)) }}{{ $boxes = $boxes | append . }}{{ end }}{{ end -}}
+{{- if $boxes }}
+<div class="author-boxes">
+  {{- range $boxes }}
+  <a href="{{ .RelPermalink }}" class="author-box">
+    {{ partial "avatar.html" . }}
+    <div><span class="author-box-label">Written by</span><b>{{ .Title }}</b>{{ with .Params.role }}<span>{{ . }}</span>{{ end }}{{ with .Params.bio }}<p>{{ . }}</p>{{ end }}</div>
+  </a>
+  {{- end }}
+</div>
+{{- end }}

@@ -1,0 +1,14 @@
+{{ define "main" }}
+<header class="page-head">
+  <span class="label">Authors</span>
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="page-head-text">{{ . }}</div>{{ end }}
+</header>
+<div class="people-wrap">
+  <div class="people">
+    {{- range .Pages.ByTitle }}
+    <a href="{{ .RelPermalink }}" class="person">{{ partial "avatar.html" . }}<b>{{ .Title }}</b><span>{{ .Params.role }}</span></a>
+    {{- end }}
+  </div>
+</div>
+{{ end }}

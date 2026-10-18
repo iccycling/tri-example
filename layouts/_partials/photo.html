@@ -1,0 +1,4 @@
+{{- /* Porträtfoto von Komitee/Autor: Datei "photo.*" im Ordner (oder front matter: photo: "dateiname.jpg") */ -}}
+{{- $r := "" -}}
+{{- with .Params.photo }}{{ $r = $.Resources.GetMatch . }}{{ else }}{{ $r = .Resources.GetMatch "photo*" }}{{ end -}}
+{{- return $r -}}
