@@ -609,7 +609,7 @@ nav::after {
 
 /* ── JOIN BAND ── */
 .join {
-  background: var(--accent);
+  background: var(--accent-dark);
   padding: 80px var(--gutter);
   display: flex; align-items: center; justify-content: space-between;
   gap: 40px; flex-wrap: wrap;
@@ -1365,10 +1365,10 @@ nav:not(.nav--static) :focus-visible, footer :focus-visible, .join :focus-visibl
   /* ── Flächen im Original-Blau (nicht das helle Text-Blau) ── */
   .nav-cta,
   .nav-drawer .drawer-cta,
-  .join,
   .wa-modal-close,
   .btn-accent { background: #0000CD; }
-  .btn-white { color: #0000CD; }
+  .join { background: #0000A2; }   /* auf dunklem Grund wirkt das helle Blau grell → dunkleres Blau */
+  .btn-white { color: #0000A2; }
   .btn-white:hover { background: #E6E6FA; }
   .instagram--cta .text-link:hover,
   a.tag-pill:hover,
@@ -1432,6 +1432,10 @@ nav:not(.nav--static) :focus-visible, footer :focus-visible, .join :focus-visibl
   .plogo:hover img, .plogo:focus-visible img { filter: brightness(0) invert(1); opacity: 1; }
 }
 
+/* Hochformat-Fotos mobil: graue Fläche → dunkel */
+@media (prefers-color-scheme: dark) and (max-width: 860px) {
+  .nb-card--portrait .nb-media { background: #1B2130; }
+}
 /* Hochformat-Fotos mobil: graue Fläche → dunkel */
 @media (prefers-color-scheme: dark) and (max-width: 860px) {
   .nb-card--portrait .nb-media { background: #1B2130; }
