@@ -1,4 +1,5 @@
 ---
+hero: true
 title: "Run"
 description: "Relaxed group runs in Hyde Park for every pace at Imperial College Triathlon Club."
 type: "pages"
