@@ -15,6 +15,11 @@
 /* ── RESET & BASE ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 :root {
   /* Farben — Akzent: blue (Imperial-inspiriert) */
   --accent:      #0000cd;
