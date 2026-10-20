@@ -1331,3 +1331,108 @@ nav:not(.nav--static) :focus-visible, footer :focus-visible, .join :focus-visibl
 .post-figure .credit { display: block; margin-top: 2px; font-size: 0.7rem; font-style: normal; letter-spacing: 0.06em; text-transform: uppercase; color: #6C727E; }
 /* Beitragskopf: kurze Akzentlinie statt Zusammenfassung */
 .post-rule { display: block; width: 48px; height: 3px; margin: 28px auto 0; background: var(--accent); }
+
+/* ============================================================
+   IC Tri — Dark Theme
+   ANS ENDE von main.css anhängen (muss nach allen anderen Regeln stehen).
+   Greift automatisch, wenn Handy/Computer auf "Dunkel" steht.
+
+   Zum Testen im hellen Modus: "@media (prefers-color-scheme: dark)" unten
+   vorübergehend durch "@media all" ersetzen und danach zurücksetzen.
+   ============================================================ */
+
+@media (prefers-color-scheme: dark) {
+
+  /* ── Farben ──
+     --accent ist im Dark Theme das HELLE Blau (für Text, Links, Linien, Icons).
+     Flächen (Buttons, Join-Band) setzen wir unten explizit auf das Original-Blau #0000CD. */
+  :root {
+    color-scheme: dark;
+    --accent:      #7C88FF;   /* Text, Links, Icons auf dunklem Grund */
+    --accent-dark: #0000A2;   /* Hover von Flächen (Buttons) */
+    --accent-tint: #171C45;   /* dunkle Fläche, z. B. Tag-Pills */
+    --black:  #F1F3F8;        /* heißt weiter "black", ist hier aber die Textfarbe */
+    --gray:   #A4ABBD;
+    --border: #262D3B;
+    --off:    #151A23;        /* Flächen / Hover */
+    --bg:     #0E1117;        /* Seitenhintergrund */
+  }
+
+  html { background: var(--bg); }
+  body { background: var(--bg); color: var(--black); }
+  footer { background: #090B10; }
+
+  /* ── Flächen im Original-Blau (nicht das helle Text-Blau) ── */
+  .nav-cta,
+  .nav-drawer .drawer-cta,
+  .join,
+  .wa-modal-close,
+  .btn-accent { background: #0000CD; }
+  .btn-white { color: #0000CD; }
+  .btn-white:hover { background: #E6E6FA; }
+  .instagram--cta .text-link:hover,
+  a.tag-pill:hover,
+  a.disc-cross-link:hover .dcl-plus,
+  a.disc-cross-link:focus-visible .dcl-plus,
+  .gallery-btn:hover { background: #0000CD; }
+
+  /* ── Flächen, die vorher weiß waren ── */
+  .nav-dropdown,
+  .nav-drawer,
+  .wa-modal,
+  .faq-question,
+  .nb-card,
+  .share a,
+  .share button,
+  .disc-cross-link,
+  .bg-off .callout,
+  .prose kbd { background: var(--bg); }
+  .nav--static { background: rgba(14, 17, 23, 0.97); }
+  .nb-card:hover, .faq-question:hover, a.disc-cross-link:hover { background: var(--off); }
+  .person:hover .avatar, .person:focus-visible .avatar { box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent); }
+  .prose kbd { border-color: #3A4152; }
+
+  /* ── Navigation auf Unterseiten ── */
+  .nav--static .nav-logo { color: var(--white); }
+  .nav--static .nav-logo img { filter: none; }   /* weißes Logo bleibt weiß */
+  .nav--static .nav-links a,
+  .nav--static .nav-links .nav-dd-trigger { color: #C9CFDC; }
+  .nav--static .nav-links a:hover,
+  .nav--static .nav-links a.active,
+  .nav--static .nav-links a:focus-visible,
+  .nav--static .nav-links .nav-dd-trigger:hover,
+  .nav--static .nav-links .nav-dd-trigger.active,
+  .nav--static .nav-links .nav-dd-trigger:focus-visible,
+  .nav--static .has-dropdown:hover > .nav-dd-trigger,
+  .nav--static .has-dropdown.open > .nav-dd-trigger { color: var(--white); }
+
+  /* ── Text ── */
+  .prose { color: #D5D9E3; }
+  .prose a:hover { color: #A5AEFF; }
+  .topic--hl p { color: #B8BFD0; }
+  .dist { border-top-color: #2F3646; }
+
+  /* ── Elemente, die "black" als Hintergrund nutzen ── */
+  .tag-filter a.is-active { color: #0E1117; }
+  .skip-link { color: #0E1117; }
+  .gallery-btn { color: #161A1D; }
+
+  /* ── Konturschrift und große Symbole ── */
+  .disciplines--numbered .disc-number { -webkit-text-stroke-color: rgba(255, 255, 255, 0.16); }
+  .disciplines--numbered .disc-item:hover .disc-number { -webkit-text-stroke-color: var(--accent); }
+  .big-num { -webkit-text-stroke-color: rgba(255, 255, 255, 0.14); }
+  .big-icon { color: rgba(255, 255, 255, 0.22); }
+
+  /* ── Startseite: News & Blog-Bereich ── */
+  .news { background: var(--bg); }
+
+  /* ── Partner-Logos: hell statt dunkel ──
+     Alle Logos werden zu weißen Silhouetten. Das klappt nur mit transparentem Hintergrund (PNG/SVG). */
+  .plogo img { filter: brightness(0) invert(1); opacity: 0.6; }
+  .plogo:hover img, .plogo:focus-visible img { filter: brightness(0) invert(1); opacity: 1; }
+}
+
+/* Hochformat-Fotos mobil: graue Fläche → dunkel */
+@media (prefers-color-scheme: dark) and (max-width: 860px) {
+  .nb-card--portrait .nb-media { background: #1B2130; }
+}
