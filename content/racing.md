@@ -1,4 +1,5 @@
 ---
+hero: true
 title: "Racing"
 description: "From sprint to Ironman: how racing works at Imperial College Triathlon Club, including BUCS and local events."
 type: "pages"
