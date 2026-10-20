@@ -291,7 +291,8 @@ nav::after {
 /* ── PAGE HERO (subpages) ── */
 .page-hero {
   position: relative;
-  height: 52vh; min-height: 380px;
+  height: calc(52vh + 60px);
+  min-height: 440px;
   overflow: hidden;
   display: flex; align-items: flex-end;
 }
