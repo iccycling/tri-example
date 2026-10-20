@@ -1,4 +1,5 @@
 ---
+hero: true
 title: "About"
 description: "Imperial College Triathlon Club is a student-run community for swimmers, cyclists and runners of every level."
 type: "pages"
