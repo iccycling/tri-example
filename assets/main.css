@@ -64,7 +64,7 @@ nav {
 nav::after {
   content: "";
   position: absolute;
-  bottom: 0; left: 0; right: 0);   /* bündig mit Logo / Join, schneidet das Hero nicht durch */
+  bottom: 0; left: 0; right: 0;   /* bündig mit Logo / Join, schneidet das Hero nicht durch */
   height: 1px;
   background: rgba(255,255,255,0.25);
 }
@@ -992,7 +992,7 @@ a.disc-cross-link .arrow-link { margin-left: auto; }
   .nb-card:not(.nb-card--featured) .nb-body { padding: 22px; }
   .nb-card:not(.nb-card--featured) + .nb-card:not(.nb-card--featured) { border-left: none; border-top: 1px solid var(--border); }
   nav { padding: 0 20px; }
-  nav::after { left: 20px; right: 20px; }
+  nav::after { left: 0px; right: 0px; }
   .nav-links { display: none; }
   .nav-cta   { display: none; }
   .nav-hamburger { display: flex; }
