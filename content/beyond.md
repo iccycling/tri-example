@@ -1,4 +1,5 @@
 ---
+hero: true
 title: "Beyond the disciplines"
 description: "Strength, mobility, nutrition, recovery, gear and training know-how: the fourth discipline of triathlon."
 type: "pages"
