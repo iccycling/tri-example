@@ -1,4 +1,5 @@
 ---
+hero: true
 title: "Bike"
 description: "Spinning sessions and group rides in Richmond Park at Imperial College Triathlon Club. All levels welcome."
 type: "pages"
