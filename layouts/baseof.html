@@ -5,7 +5,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 {{ block "header" . }}
-{{ partial "nav.html" (dict "page" . "static" true) }}
+{{ partial "nav.html" (dict "page" . "static" (not (or .IsHome .Params.hero))) }}
 {{ partial "drawer.html" . }}
 {{ end }}
 
