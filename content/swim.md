@@ -7,5 +7,6 @@ url: "/swim/"
 nav: "training"      # markiert "Training" im Menü
 navitem: "swim"      # markiert "Swim" im Dropdown
 faq: "swim"
+hero: true
 ---
 <!-- Der Seiteninhalt steht in layouts/pages/swim.html -->
