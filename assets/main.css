@@ -397,14 +397,22 @@ nav::after {
 }
 
 /* ── DISCIPLINES (index) ── */
-.disciplines {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  padding-inline: calc(var(--gutter) - 40px);   /* Karten haben selbst 40px Innenabstand */
+/* Wrap trägt Außenabstand und Linie (Karten haben selbst 40px Innenabstand); der Scroller schneidet an der Inhaltsbreite ab,
+   damit die vierte Karte (Beyond) auch auf sehr breiten Bildschirmen erst nach dem Scrollen erscheint. */
+.disciplines-wrap {
+  position: relative;
+  padding-inline: calc(var(--gutter) - 40px);
   border-bottom: 1px solid var(--border);
 }
+.disciplines {
+  display: flex; overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.disciplines::-webkit-scrollbar { display: none; }
 
 .disc-item {
   position: relative; overflow: hidden;
+  flex: 0 0 calc(100% / 3); scroll-snap-align: start;   /* drei Karten sichtbar, weitere liegen rechts */
   padding: 52px 40px 36px;
   border-right: 1px solid var(--border);
   text-decoration: none; color: inherit;
@@ -469,6 +477,27 @@ nav::after {
 .disc-arrow:empty { font-size: 1.2rem; line-height: 1; }   /* nur Pfeil, kein Text */
 .disc-arrow:empty::after { display: inline-block; transition: transform 0.2s; }
 .disc-item:hover .disc-arrow:empty::after { transform: translateX(6px); }
+
+/* Hinweis auf weitere Karten (Beyond): Verlauf + Pfeil-Button am rechten Rand; per JS ein-/ausgeblendet */
+.disciplines-wrap::after {
+  content: ""; position: absolute; top: 0; bottom: 0;
+  right: calc(var(--gutter) - 40px); width: 40px;   /* nur über dem Innenabstand, nie über Text */
+  pointer-events: none; transition: opacity 0.2s;
+  background: linear-gradient(to right, transparent, var(--bg, var(--white)));
+}
+.disciplines-wrap.at-end::after { opacity: 0; }
+.disc-next {
+  position: absolute; z-index: 2; top: 50%; transform: translateY(-50%);
+  right: calc(var(--gutter) - 40px + 6px);
+  width: 40px; height: 40px; display: grid; place-items: center; cursor: pointer;
+  border: 1.5px solid var(--accent); border-radius: 50%;
+  background: var(--bg, var(--white)); color: var(--accent);
+  transition: background 0.2s, color 0.2s;
+}
+.disc-next[hidden] { display: none; }
+.disc-next:hover, .disc-next:focus-visible { background: var(--accent); color: var(--white); }
+.disciplines-wrap.at-end .disc-next { right: auto; left: calc(var(--gutter) - 40px + 6px); }
+.disciplines-wrap.at-end .disc-next svg { transform: rotate(180deg); }
 
 /* Freistehender Pfeil-Link (gleiche Optik wie .disc-arrow) */
 .arrow-link {
@@ -885,7 +914,7 @@ footer {
 
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
 .split--rev .split-media { order: -1; }
-.split-media { position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: var(--accent-tint); }
+.split-media { position: relative; overflow: hidden; aspect-ratio: 4 / 3; background: var(--accent-tint); }
 .split-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .split-media figcaption { position: absolute; left: 0; bottom: 0; padding: 8px 14px; font-size: 0.75rem; color: var(--white); background: rgba(0,0,0,0.55); }
 
@@ -1012,7 +1041,9 @@ a.disc-cross-link .arrow-link { margin-left: auto; }
 
   .page-hero-content { padding: 0 20px 40px; }
 
-  .disciplines { grid-template-columns: 1fr; padding-inline: 0; }
+  .disciplines-wrap { padding-inline: 0; }
+  .disciplines { display: grid; grid-template-columns: 1fr; overflow: visible; scroll-snap-type: none; }
+  .disc-next, .disciplines-wrap::after { display: none; }
   .disc-item { border-right: none; border-bottom: 1px solid var(--border); padding: 44px 20px 32px; }   /* 20px wie alle anderen Abschnitte mobil */
   .disciplines--numbered .disc-number { right: 20px; }
   .disc-item:last-child { border-bottom: none; }
@@ -1372,6 +1403,8 @@ nav:not(.nav--static) :focus-visible, footer :focus-visible, .join :focus-visibl
   a.tag-pill:hover,
   a.disc-cross-link:hover .dcl-plus,
   a.disc-cross-link:focus-visible .dcl-plus,
+  .disc-next:hover,
+  .disc-next:focus-visible,
   .gallery-btn:hover { background: #0000CD; }
 
   /* ── Flächen, die vorher weiß waren ── */
@@ -1430,10 +1463,6 @@ nav:not(.nav--static) :focus-visible, footer :focus-visible, .join :focus-visibl
   .plogo:hover img, .plogo:focus-visible img { filter: brightness(0) invert(1); opacity: 1; }
 }
 
-/* Hochformat-Fotos mobil: graue Fläche → dunkel */
-@media (prefers-color-scheme: dark) and (max-width: 860px) {
-  .nb-card--portrait .nb-media { background: #1B2130; }
-}
 /* Hochformat-Fotos mobil: graue Fläche → dunkel */
 @media (prefers-color-scheme: dark) and (max-width: 860px) {
   .nb-card--portrait .nb-media { background: #1B2130; }

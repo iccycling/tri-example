@@ -183,6 +183,35 @@
 })();
 
 
+/* ── DISZIPLINEN-KARTEN: Pfeil zum Weiterscrollen (Desktop: drei sichtbar, vierte Karte rechts) ── */
+(() => {
+  const wrap = document.querySelector('.disciplines-wrap');
+  if (!wrap) return;
+  const scroller = wrap.querySelector('.disciplines');
+  const btn = wrap.querySelector('.disc-next');
+  if (!scroller || !btn) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const state = () => {
+    const max = scroller.scrollWidth - scroller.clientWidth;
+    return { max, scrollable: max > 4, atEnd: scroller.scrollLeft >= max - 4 };
+  };
+  const update = () => {
+    const s = state();
+    btn.hidden = !s.scrollable;                       // mobil (Karten untereinander) gibt es nichts zu scrollen
+    wrap.classList.toggle('at-end', !s.scrollable || s.atEnd);
+    btn.setAttribute('aria-label', s.atEnd ? 'Back to the first discipline' : 'Show next discipline');
+  };
+  btn.addEventListener('click', () => {
+    const s = state();
+    const step = scroller.querySelector('.disc-item').offsetWidth;
+    scroller.scrollBy({ left: s.atEnd ? -s.max : step, behavior: reduce.matches ? 'auto' : 'smooth' });
+  });
+  scroller.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+
 /* ── Code-Blöcke, die breiter als die Textspalte sind, verbreitern ── */
 document.querySelectorAll('.prose pre').forEach(pre => {
   if (pre.scrollWidth > pre.clientWidth + 2) pre.classList.add('is-wide');
